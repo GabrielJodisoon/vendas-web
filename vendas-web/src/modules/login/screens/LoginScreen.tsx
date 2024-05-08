@@ -1,5 +1,4 @@
-import axios from "axios";
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 import Button from "../../../shared/components/buttons/button/Button";
 import Input from "../../../shared/components/inputs/input/Input";
