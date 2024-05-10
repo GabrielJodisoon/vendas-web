@@ -3,6 +3,8 @@ import { loginRoutes } from "./modules/login/routes";
 
 import type { Router as RemixRouter } from '@remix-run/router';
 import { useNotification } from "./shared/hooks/useNotification";
+import { firstScreenRoute } from "./modules/firstScreen/routes";
+import { productScreens } from "./modules/product/routes";
 
 const mainRoutes: RouteObject[] = [
   {
@@ -12,7 +14,7 @@ const mainRoutes: RouteObject[] = [
   }
 ]
 
-const router: RemixRouter = createBrowserRouter([...mainRoutes, ...loginRoutes]);
+const router: RemixRouter = createBrowserRouter([...firstScreenRoute, ...loginRoutes, ...productScreens]);
 
 function App() {
   const { contextHolder } = useNotification();

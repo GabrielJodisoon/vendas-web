@@ -11,11 +11,9 @@ import {
   TitleLogin,
 } from "../styles/loginScreen.styles";
 import { useRequests } from "../../../shared/hooks/useRequests";
-import { useGlobalContext } from "../../../shared/hooks/useGlobalContext";
 import { UserType } from "../types/UserTypes";
 
 const LoginScreen = () => {
-  const { accessToken, setAccessToken } = useGlobalContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { postRequest, loading } = useRequests();
@@ -28,13 +26,12 @@ const LoginScreen = () => {
     setPassword(event.target.value);
   };
 
-  const handleLogin = async () => {
-    const user = await postRequest<UserType>("http://localhost:8080/auth", {
+  const handleLogin = () => {
+    postRequest<UserType>("http://localhost:8080/auth", {
       email: email,
       password: password,
     });
 
-    setAccessToken(user?.accessToken || "");
 
   };
 
@@ -45,7 +42,7 @@ const LoginScreen = () => {
         <LimitedContainer>
           <LogoImg src="./logo.png" />
           <TitleLogin level={2} type="warning">
-            Login ({accessToken})
+            Login
           </TitleLogin>
           <Input
             title="Email"
