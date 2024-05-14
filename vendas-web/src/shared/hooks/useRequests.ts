@@ -12,7 +12,7 @@ import { AuthType } from "../../modules/login/types/AuthType";
 
 export const useRequests = () => {
     const [loading, setLoading] = useState(false);
-    const { setNotification } = useGlobalContext();
+    const { setNotification, setUser } = useGlobalContext();
     const navigate = useNavigate();
 
 
@@ -48,9 +48,11 @@ export const useRequests = () => {
     };
     const authRequest = async (body: unknown): Promise<void> => {
         setLoading(true);
+
         await connectionAPIPost<AuthType>(URL_AUTH, body)
             .then((result) => {
                 setNotification('Bem Vindo', 'success')
+                setUser(result.user);
                 setAuthorizationToken(result.accessToken);
 
                 navigate(ProductRoutesEnum.PRODUCT);
